@@ -5,37 +5,34 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/omoide-digest.svg)](https://pypi.org/project/omoide-digest/)
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 
-Content loader for the Omoide project
+Загрузчик контента для проекта Omoide.
 
+## Что делает
 
-## Features
+Предоставляет консольные инструменты для анализа исходных данных и их загрузки
+в базу Omoide.
 
-- Fully typed with annotations and checked with mypy, [PEP561 compatible](https://www.python.org/dev/peps/pep-0561/)
-- Add yours!
+Имеет три базовых операции:
 
+1. [Digest](omoide_digest/digest/README.md) - пройтись по пользовательским файлам и собрать с них всю метаинформацию.
+2. [Convert](omoide_digest/convert/README.md) - сохранить или скопировать пользовательские файлы в каталоги, из которых с ними потом сможет работать Omoide.
+3. [Sync](omoide_digest/sync/README.md) - синхронизировать локальную базу данных с базой данных приложения.
 
-## Installation
+## Почему именно так
 
-```bash
-pip install omoide-digest
-```
+Digest является отдельным компонентом, его наличие не требуется для работы 
+приложения, он имеет свои специфические зависимости. Было решено вынести его в 
+отдельный репозиторий. Основная идея его работы - порождать такие артефакты из 
+пользовательских данных, которые позволят заполнить пустую базу данных или 
+исправить повреждённую. 
 
-
-## Example
-
-Showcase how your project can be used:
-
-```python
-from omoide_digest.example import some_function
-
-print(some_function(3, 4))
-# => 7
-```
+Он сохраняет промежуточные представления в виде sqlite баз, каждое из которых 
+по сути является полноценной базой данных сервера. Однако вспомогательная 
+информация при операции sync в основную базу не попадает.
 
 ## License
 
 [MIT](https://github.com/IgorZyktin/omoide-digest/blob/master/LICENSE)
-
 
 ## Credits
 
